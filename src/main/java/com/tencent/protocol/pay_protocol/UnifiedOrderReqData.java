@@ -14,34 +14,32 @@ import java.util.Map;
  */
 public class UnifiedOrderReqData {
     //每个字段具体的意思请查看API文档
-    private String appid = "";
-    private String mch_id = "";
-    private String device_info = "";
-    private String nonce_str = "";
-    private String sign = "";
-    private String body = "";
-    private String attach = "";
-    private String out_trade_no = "";
-    private int total_fee = 0;
-    private String spbill_create_ip = "";
-    private String time_start = "";
-    private String time_expire = "";
-    private String goods_tag = "";
+    private String appid;
+    private String mch_id;
+    private String device_info;
+    private String nonce_str;
+    private String sign;
+    private String body;
+    private String attach;
+    private String out_trade_no;
+    private Integer total_fee;
+    private String spbill_create_ip;
+    private String time_start;
+    private String time_expire;
+    private String goods_tag;
 
-    private String notify_url = "";
-    private String trade_type = "";
-    private String product_id = "";
-    private String limit_pay = "";
-    private String openid = "";
-    private String sdk_version;
-
+    private String notify_url;
+    private String trade_type;
+    private String product_id;
+    private String limit_pay;
+    private String openid;
 
 
-    public UnifiedOrderReqData(String body,String attach,String outTradeNo,int totalFee,String deviceInfo,
-                               String spBillCreateIP,String timeStart,String timeExpire,String goodsTag,
+
+
+    public UnifiedOrderReqData(String body,String attach, String outTradeNo, int totalFee, String deviceInfo,
+                               String spBillCreateIP, String timeStart, String timeExpire,String goodsTag,
                                String tradeType){
-
-        setSdk_version(Configure.getSdkVersion());
 
         //微信分配的公众号ID（开通公众号之后可以获取到）
         setAppid(Configure.getAppid());
@@ -158,11 +156,11 @@ public class UnifiedOrderReqData {
         this.out_trade_no = out_trade_no;
     }
 
-    public int getTotal_fee() {
+    public Integer getTotal_fee() {
         return total_fee;
     }
 
-    public void setTotal_fee(int total_fee) {
+    public void setTotal_fee(Integer total_fee) {
         this.total_fee = total_fee;
     }
 
@@ -238,13 +236,6 @@ public class UnifiedOrderReqData {
         this.openid = openid;
     }
 
-    public String getSdk_version() {
-        return sdk_version;
-    }
-
-    public void setSdk_version(String sdk_version) {
-        this.sdk_version = sdk_version;
-    }
 
     public Map<String,Object> toMap(){
         Map<String,Object> map = new HashMap<String, Object>();
@@ -264,4 +255,6 @@ public class UnifiedOrderReqData {
         }
         return map;
     }
+
+
 }
