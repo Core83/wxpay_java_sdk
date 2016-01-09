@@ -1,12 +1,10 @@
 package com.tencent;
 
-import com.tencent.business.DownloadBillBusiness;
-import com.tencent.business.RefundBusiness;
-import com.tencent.business.RefundQueryBusiness;
-import com.tencent.business.ScanPayBusiness;
+import com.tencent.business.*;
 import com.tencent.common.Configure;
 import com.tencent.protocol.downloadbill_protocol.DownloadBillReqData;
 import com.tencent.protocol.pay_protocol.ScanPayReqData;
+import com.tencent.protocol.pay_protocol.UnifiedOrderReqData;
 import com.tencent.protocol.pay_query_protocol.ScanPayQueryReqData;
 import com.tencent.protocol.refund_protocol.RefundReqData;
 import com.tencent.protocol.refund_query_protocol.RefundQueryReqData;
@@ -34,6 +32,18 @@ public class WXPay {
         Configure.setSubMchID(sdbMchID);
         Configure.setCertLocalPath(certLocalPath);
         Configure.setCertPassword(certPassword);
+    }
+
+
+
+    /**
+     * 统一下单服务
+     * @param unifiedOrderReqData 这个数据对象里面包含了API要求提交的各种数据字段
+     * @return API返回的数据
+     * @throws Exception
+     */
+    public static String requestUnifiedOrderService(UnifiedOrderReqData unifiedOrderReqData) throws Exception{
+        return new UnifiedOrderService().request(unifiedOrderReqData);
     }
 
     /**
@@ -104,6 +114,16 @@ public class WXPay {
      */
     public static void doScanPayBusiness(ScanPayReqData scanPayReqData, ScanPayBusiness.ResultListener resultListener) throws Exception {
         new ScanPayBusiness().run(scanPayReqData, resultListener);
+    }
+
+    /**
+     * 直接执行统一下单业务逻辑（包含最佳实践流程）
+     * @param unifiedOrderReqData 这个数据对象里面包含了API要求提交的各种数据字段
+     * @param resultListener 商户需要自己监听统一下业务逻辑可能触发的各种分支事件，并做好合理的响应处理
+     * @throws Exception
+     */
+    public static void doUnifiedOrderBusiness(UnifiedOrderReqData unifiedOrderReqData, UnifiedOrderBusiness.ResultListener resultListener) throws Exception {
+        new UnifiedOrderBusiness().run(unifiedOrderReqData, resultListener);
     }
 
     /**
